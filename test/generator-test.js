@@ -15,9 +15,7 @@ test.before(() => {
 
 test('Generator', () => {
   assert.file([
-    'bin/deploy',
     'bin/utterances',
-    'config/lambda.config.js',
     'config/webpack.config.babel.js',
     'model/dictionary.json',
     'model/schema.json',
@@ -30,6 +28,7 @@ test('Generator', () => {
     '.gitignore',
     '.travis.yml',
     'package.json',
-    'README.md'
+    'README.md',
+    'serverless.yml'
   ]);
 });
