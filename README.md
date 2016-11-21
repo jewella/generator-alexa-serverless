@@ -1,19 +1,20 @@
 # generator-alexa-skill
 
-[![Build Status](https://travis-ci.org/cameronhunter/generator-alexa-skill.svg?branch=master)](https://travis-ci.org/cameronhunter/generator-alexa-skill) [![NPM Version](https://img.shields.io/npm/v/generator-alexa-skill.svg)](https://npmjs.org/package/generator-alexa-skill) [![License](https://img.shields.io/npm/l/generator-alexa-skill.svg)](https://github.com/cameronhunter/generator-alexa-skill/blob/master/LICENSE)
 
 A [Yeoman](http://yeoman.io) generator for scaffolding an Alexa Skill for AWS Lambda using [alexa-lambda-skill](https://github.com/cameronhunter/alexa-lambda-skill).
+
+Deployment, role creation, and additional AWS resource provisioning provided by [Serverless Framework](https://github.com/serverless/serverless).
 
 ## Installation
 
 ```bash
-npm install -g yo generator-alexa-skill
+npm install -g yo generator-alexa-serverless
 ```
 
 ## Generating a new Alexa Skill
 
 ```bash
-yo alexa-skill
+yo alexa-serverless
 ```
 
 This creates a brand new Alexa Skill, add your logic into `src/index.js` and tests into `test/index-test.js`. The template is a HelloWorld skill:
