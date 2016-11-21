@@ -1,4 +1,4 @@
-# generator-alexa-skill
+# generator-alexa-serverless
 
 
 A [Yeoman](http://yeoman.io) generator for scaffolding an Alexa Skill for AWS Lambda using [alexa-lambda-skill](https://github.com/cameronhunter/alexa-lambda-skill).
