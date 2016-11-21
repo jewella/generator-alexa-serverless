@@ -9,28 +9,18 @@ module.exports = yeoman.Base.extend({
     var done = this.async();
 
     this.log(yosay(
-      'Welcome to the amazing ' + chalk.red('Alexa Skill') + ' generator!'
+      'Welcome to the amazing ' + chalk.red('Alexa Skill') + ' generator! Now with ' + chalk.yellow('Serverless Framework') + ' support!'
     ));
 
     var prompts = [
       { type: 'input', name: 'name', message: 'Your skill name', default: this.appname },
-      { type: 'confirm', name: 'aws', message: 'Do you have an AWS access and secret key?' },
-      { type: 'input', name: 'accessKeyId', message: 'AWS access key', when: function(props) { return props.aws; } },
-      { type: 'input', name: 'secretAccessKey', message: 'AWS secret key', when: function(props) { return props.aws; } },
-      { type: 'confirm', name: 'roleSetup', message: 'Have you set up an AWS Lambda execution role?', when: function(props) { return props.aws; } },
-      { type: 'input', name: 'role', message: 'Role ARN', when: function(props) { return props.roleSetup; } }
+      { type: 'input', name: 'description', message: 'Description', when: function(props) { return props.description; } }
     ];
 
     this.prompt(prompts, function(props) {
       this.props = props;
 
-      if (!props.aws) {
-        this.log(chalk.bold.white('\nYou can set your AWS access and secret keys later in ' + chalk.cyan('config/lambda.config.js\n')));
-      }
-
-      if (props.aws && !props.roleSetup) {
-        this.log(chalk.bold.white('\nYou can set your AWS Lambda execution role later in ' + chalk.cyan('config/lambda.config.js\n')));
-      }
+      this.log(chalk.bold.white('\nYou must have AWS credentials configured before deploying. ' + chalk.cyan('(https://serverless.com/framework/docs/providers/aws/guide/credentials/)\n')));
 
       done();
     }.bind(this));
@@ -42,9 +32,7 @@ module.exports = yeoman.Base.extend({
         name: this.props.name,
         fileName: _.kebabCase(this.props.name),
         className: _.capitalize(_.camelCase(this.props.name)),
-        accessKeyId: this.props.accessKeyId || '',
-        secretAccessKey: this.props.secretAccessKey || '',
-        role: this.props.role || '',
+        description: this.props.description
       };
 
       this.fs.copy(this.templatePath('_babelrc'), this.destinationPath('.babelrc'));
@@ -53,13 +41,12 @@ module.exports = yeoman.Base.extend({
       this.fs.copyTpl(this.templatePath('_package.json'), this.destinationPath('package.json'), data);
       this.fs.copy(this.templatePath('_travis.yml'), this.destinationPath('.travis.yml'));
       this.fs.copyTpl(this.templatePath('README.md'), this.destinationPath('README.md'), data);
+      this.fs.copyTpl(this.templatePath('serverless.yml'), this.destinationPath('serverless.yml'), data);
 
       // Create in generated 'bin' dir
-      this.fs.copy(this.templatePath('bin/deploy'), this.destinationPath('bin/deploy'));
       this.fs.copy(this.templatePath('bin/utterances'), this.destinationPath('bin/utterances'));
 
       // Create in generated 'config' dir
-      this.fs.copyTpl(this.templatePath('config/lambda.config.js'), this.destinationPath('config/lambda.config.js'), data);
       this.fs.copyTpl(this.templatePath('config/webpack.config.babel.js'), this.destinationPath('config/webpack.config.babel.js'), data);
 
       // Create in generated 'model' dir
