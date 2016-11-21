@@ -1,14 +1,19 @@
 {
-  "name": "generator-alexa-skill",
-  "version": "4.0.6",
-  "description": "A Yeoman generator for Alexa Skills to run on AWS Lambda",
+  "name": "generator-alexa-serverless",
+  "version": "1.0.0",
+  "description": "A Yeoman generator for Alexa Skills to run on AWS Lambda using the Serverless Framework",
   "license": "MIT",
   "main": "app/index.js",
-  "repository": "cameronhunter/generator-alexa-skill",
-  "author": {
+  "repository": "jewella/generator-alexa-serverless",
+  "originalAuthor": {
     "name": "Cameron Hunter",
     "email": "hello@cameronhunter.co.uk",
     "url": "https://github.com/cameronhunter"
+  },
+  "author": {
+    "name": "Aaron Jewell",
+    "email": "jewell.73@osu.edu",
+    "url": "https://github.com/jewella"
   },
   "scripts": {
     "lint": "eslint generators/**/*.js test/**/*.js",
@@ -21,7 +26,8 @@
     "generators"
   ],
   "keywords": [
-    "yeoman-generator"
+    "yeoman-generator",
+    "serverless"
   ],
   "dependencies": {
     "chalk": "^1.1.3",
