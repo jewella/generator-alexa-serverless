@@ -1,0 +1,29 @@
+# For full config options, check the docs:
+#    docs.serverless.com
+
+service: <%= fileName %>
+
+frameworkVersion: "=1.1.0"
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+
+package:
+  artifact: build/package.zip
+
+functions:
+  skill:
+    handler: index.handler
+    name: ${self:provider.stage}-<%= fileName %>
+    description: <%= description %>
+
+resources:
+  Resources:
+    AlexaPermission:
+      Type: AWS::Lambda::Permission
+      Properties:
+        FunctionName:
+          Ref: SkillLambdaFunction
+        Action: lambda:InvokeFunction
+        Principal: alexa-appkit.amazon.com

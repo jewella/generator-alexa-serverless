@@ -1,7 +1,7 @@
 {
   "name": "<%= fileName %>",
   "version": "0.0.0",
-  "description": "An Alexa skill for the Amazon Echo.",
+  "description": "<%= description %>",
   "main": "build/index.js",
   "scripts": {
     "lint": "eslint src/**/*.js test/**/*.js",
@@ -14,7 +14,7 @@
     "prepackage": "npm run test",
     "package": "bestzip build/package.zip build/index.js build/UTTERANCES",
     "predeploy": "npm run package",
-    "deploy": "bin/deploy --config config/lambda.config.js --package build/package.zip"
+    "deploy": "node_modules/.bin/sls deploy"
   },
   "ava": {
     "babel": "inherit"
@@ -42,6 +42,7 @@
     "node-aws-lambda": "^0.1.8",
     "nomnom": "^1.8.1",
     "npm-run-all": "^3.1.1",
+    "serverless": "1.1.0",
     "webpack": "^1.12.14"
   },
   "files": [
